@@ -6,38 +6,30 @@ func checkAlmostEquivalent(word1 string, word2 string) bool {
     map1 := make(map[rune]int)
     map2 := make(map[rune]int)
 
-    for _, val := range word1 {
-        count, ok := map1[val]
+    countFrequency(word1, map1)
+    countFrequency(word2, map2)
+
+    return checkFrequencyDiff(map1, map2) &&
+        checkFrequencyDiff(map2, map1)
+}
+
+func countFrequency(word string, countMap map[rune]int) {
+     for _, val := range word {
+        count, ok := countMap[val]
         if !ok {
-            map1[val] = 1
+            countMap[val] = 1
         } else {
-            map1[val] = count+1
+            countMap[val] = count+1
         }
     }
+}
 
-    for _, val := range word2 {
-        count, ok := map2[val]
-        if !ok {
-            map2[val] = 1
-        } else {
-            map2[val] = count+1
-        }
-    }
-
+func checkFrequencyDiff(map1, map2 map[rune]int) bool {
     for key, val := range map1 {
         val2 := map2[key]
         if math.Abs(float64(val - val2)) > float64(3) {
             return false
         }
     }
-
-    for key, val := range map2 {
-        val2 := map1[key]
-        if  math.Abs(float64(val - val2)) > float64(3) {
-            return false
-        }
-    }
-
     return true
-
 }
