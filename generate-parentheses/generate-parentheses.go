@@ -1,20 +1,20 @@
-func backtrack(cur string, openN int, closeN int) ([]string) {
+func backtrack(cur string, openN int, closeN int, result *[]string) {
     if openN == 0 && closeN == 0 {
-        // result = append(result, cur)
-        return []string{cur}
+       *result = append( *result, cur)
+       return
     }    
 
-    var left, right []string
-
     if openN > 0 {
-        left = backtrack(cur + "(", openN-1, closeN)
+        backtrack(cur + "(", openN-1, closeN, result)
     }
     if openN < closeN {
-        right = backtrack(cur + ")", openN, closeN-1)
+        backtrack(cur + ")", openN, closeN-1, result)
     }
-    return append(left, right...)
+    
 }
 
 func generateParenthesis(n int) []string {
-    return backtrack("(", n-1, n)
+    result := []string{} 
+    backtrack("(", n-1, n, &result)
+    return result
 }
