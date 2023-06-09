@@ -37,24 +37,29 @@ class Solution {
             }
         }
 
-        int res;
-        // if digits are larger than the Integer range, exception is thrown, then clamp the integer and return it
-        try{
-             res = Integer.parseInt(numStr.toString());  
+        long res = 0;
+        String numString = numStr.toString();
+        int j=0;
+        for(int i=numString.length()-1; i>=0; i--) {
+            res += (numString.charAt(i) -  '0') * Math.pow(10,j);
+            j++;
         }
-        catch(Exception e) {
-            if(neg) {
-                return Integer.MIN_VALUE;
-            }
-            else {
-                return Integer.MAX_VALUE;
-            }
-        }
-
-        // if number is within the integer range, just return it
+        
+        // negate the integer if input has '-'
         if(neg) {
             res = res * -1;
         }
-        return res;
+
+        // return 2^31 - 1 if input is gt 2^31 - 1
+        if(res > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+
+        // return -2^31 if input < -2^31
+        if(res < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+            
+        return (int)res;
     }
 }
