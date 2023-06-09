@@ -5,11 +5,12 @@ class Solution {
         StringBuilder numStr = new StringBuilder();
         int idx = 0, len = s.length();
 
-        //ignore space
+        // ignore leading space
         while(idx < len && s.charAt(idx) == ' ') {
             idx++;
         }
 
+        // check positive or negative
         if(idx < len && (s.charAt(idx) == '-' || s.charAt(idx) == '+')) {
             if(s.charAt(idx) == '-') {
                 neg = true;
@@ -17,6 +18,7 @@ class Solution {
             idx++;
         }
 
+        // return 0 if no digits are present after the space / sign
         if(idx < len && !(s.charAt(idx) >= '0' && s.charAt(idx) <= '9')) {
             return 0;
         }
@@ -36,6 +38,7 @@ class Solution {
         }
 
         int res;
+        // if digits are larger than the Integer range, exception is thrown, then clamp the integer and return it
         try{
              res = Integer.parseInt(numStr.toString());  
         }
@@ -48,6 +51,7 @@ class Solution {
             }
         }
 
+        // if number is within the integer range, just return it
         if(neg) {
             res = res * -1;
         }
