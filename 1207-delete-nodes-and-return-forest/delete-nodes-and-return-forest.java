@@ -22,21 +22,22 @@ class Solution {
         helper(root.left, delSet, output);
         helper(root.right, delSet, output);
 
-        if(root != null && delSet.contains(root.val)) {
-            if(root.left != null && !delSet.contains(root.left.val)) {
-                output.add(root.left);
-            }
-            if(root.right != null && !delSet.contains(root.right.val)) {
-                output.add(root.right);
-            }
-        }
-
         if(root.left != null && delSet.contains(root.left.val)) {
             root.left = null;
         }
         if(root.right != null && delSet.contains(root.right.val)) {
             root.right = null;
         }
+
+        if(root != null && delSet.contains(root.val)) {
+            if(root.left != null) {
+                output.add(root.left);
+            }
+            if(root.right != null ) {
+                output.add(root.right);
+            }
+        }
+
     }
 
     public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
