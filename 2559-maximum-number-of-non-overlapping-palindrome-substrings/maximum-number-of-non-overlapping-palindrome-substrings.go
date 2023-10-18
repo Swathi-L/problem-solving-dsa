@@ -5,7 +5,8 @@ func maxPalindromes(s string, k int) int {
 	for i := 0; i < len(sb); i++ {
 		// odd length
 		l, r := i, i
-		for l >= 0 && r < len(sb) && sb[l] == sb[r] && sb[l] != '$' && sb[r] != '$' {
+		for l >= 0 && r < len(sb) && 
+        sb[l] == sb[r] && sb[l] != '$' {
 			if r-l+1 >= k {
 				ans++
 				sb[l] = '$'
@@ -17,7 +18,8 @@ func maxPalindromes(s string, k int) int {
 		}
 		// even length
 		l, r = i, i+1
-		for l >= 0 && r < len(sb) && sb[l] == sb[r] && sb[l] != '$' && sb[r] != '$' {
+		for l >= 0 && r < len(sb) && 
+        sb[l] == sb[r] && sb[l] != '$' {
 			if r-l+1 >= k {
 				ans++
 				sb[l] = '$'
