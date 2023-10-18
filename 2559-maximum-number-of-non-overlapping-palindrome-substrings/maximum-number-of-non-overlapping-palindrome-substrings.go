@@ -3,10 +3,10 @@ func maxPalindromes(s string, k int) int {
 	sb := []rune(s)
 
 	for i := 0; i < len(sb); i++ {
-		// odd length
+		// odd length substring
 		l, r := i, i
 		for l >= 0 && r < len(sb) && 
-        sb[l] == sb[r] && sb[l] != '$' {
+        sb[l] == sb[r] && sb[l] != '$' && sb[r] != '$' {
 			if r-l+1 >= k {
 				ans++
 				sb[l] = '$'
@@ -16,10 +16,10 @@ func maxPalindromes(s string, k int) int {
 			l--
 			r++
 		}
-		// even length
+		// even length substring
 		l, r = i, i+1
 		for l >= 0 && r < len(sb) && 
-        sb[l] == sb[r] && sb[l] != '$' {
+        sb[l] == sb[r] && sb[l] != '$' && sb[r] != '$' {
 			if r-l+1 >= k {
 				ans++
 				sb[l] = '$'
