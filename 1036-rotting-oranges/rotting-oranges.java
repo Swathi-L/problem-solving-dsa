@@ -74,7 +74,6 @@ class Solution {
                 minute++;
             }
         }
-        System.out.println(minute);
        int fresh = countFresh(grid);
        if(fresh > 0) {
            return -1;
