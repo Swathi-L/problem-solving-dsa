@@ -1,6 +1,5 @@
 class Solution {
     public void buildAdj(int n, int[][] edges, List<List<Integer>> adj) {
-
         for(int i=0; i<n; i++) {
             adj.add(new ArrayList<>());
         }
@@ -11,18 +10,22 @@ class Solution {
         }
     }
 
-    public boolean dfs(int src, int dest, List<List<Integer>> adj, boolean[] visited) {
-        if(src == dest) {
-            return true;
-        }
-        if(visited[src]) {
-            return false;
-        }
+    public boolean bfs(int src, int dest, List<List<Integer>> adj, boolean[] visited) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(src);
         visited[src] = true;
 
-        for(int s : adj.get(src)) {
-            if(dfs(s, dest, adj, visited)) {
+        while(q.size() > 0) {
+            int node = q.remove();
+            if(node == dest) {
                 return true;
+            }
+
+            for(int n : adj.get(node)) {
+                if(!visited[n]) {
+                    visited[n] = true;
+                    q.add(n);
+                }
             }
         }
         return false;
@@ -31,8 +34,8 @@ class Solution {
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         List<List<Integer>> adj = new ArrayList<>();
         buildAdj(n, edges, adj);
-
-        boolean[] visited = new boolean[n];
-        return dfs(source, destination, adj, visited);
+        
+        boolean visited[] = new boolean[n];
+        return bfs(source, destination, adj, visited);
     }
 }
