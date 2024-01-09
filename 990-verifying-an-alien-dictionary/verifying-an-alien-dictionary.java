@@ -1,7 +1,6 @@
 class Solution {
     public int compare(String w1, String w2, int[] orderVal) {
         if(w1.equals(w2)) {
-            System.out.println(w1 + " " + w2 + " equal");
             return 0;
         }
         int p1 = 0, p2 = 0;
@@ -42,7 +41,6 @@ class Solution {
         orderVal = findOrderVal(order);
 
         for(int i=1; i<words.length; i++) {
-            System.out.println(compare(words[i-1], words[i], orderVal));
             if(compare(words[i-1], words[i], orderVal) > 0) {
                 return false;
             }
