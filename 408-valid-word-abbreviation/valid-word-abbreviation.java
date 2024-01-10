@@ -50,10 +50,6 @@ class Solution {
             wptr++;
         }
 
-        if(aptr == alen && wptr == wlen) {
-            return true;
-        }
-        // System.out.println("END wptr: " + wptr+" aptr: " + aptr);
-        return false;
+        return aptr == alen && wptr == wlen;
     }
 }
