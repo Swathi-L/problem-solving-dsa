@@ -13,7 +13,7 @@ class Solution {
 
     public int numIslands(char[][] grid) {
        /*
-Vertices: In the context of the "Number of Islands" problem, the       vertices can be thought of as the individual cells of the 2D grid. Each cell can be considered a node or a vertex.
+Vertices: In the context of the "Number of Islands" problem, the vertices can be thought of as the individual cells of the 2D grid. Each cell can be considered a node or a vertex.
 
 Edges: The edges represent the connections between the cells in the 2D grid. In this problem, two adjacent cells (up, down, left, or right, but not diagonally) with a value of '1' are considered to be connected. Therefore, the edges represent the connections between adjacent land cells.
         */ 
