@@ -24,8 +24,6 @@ class Solution {
             return new ArrayList<>();
         }
 
-        idxmap.put(0, new ArrayList<>(List.of(root.val)));
-
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         // queue to store corresponding indices
@@ -36,33 +34,21 @@ class Solution {
             TreeNode node = q.remove();
             int n_idx = iq.remove();
 
-            if(node.left != null) {
-                int l_idx = n_idx-1;
-                q.add(node.left);
-                iq.add(l_idx);
+            if(!idxmap.containsKey(n_idx)) {
+                idxmap.put(n_idx, new ArrayList<>(List.of(node.val)));
+            }
+            else {
+                idxmap.get(n_idx).add(node.val);
+            }
 
-                if(idxmap.containsKey(l_idx)) {
-                    List<Integer> nlist = idxmap.get(l_idx);
-                    nlist.add(node.left.val);
-                }
-                else {
-                    idxmap.put(l_idx, new ArrayList<>(List.of(node.left.val)));
-                }
+            if(node.left != null) {
+                q.add(node.left);
+                iq.add(n_idx-1);
             }
             if(node.right != null) {
-                int r_idx = n_idx+1;
                 q.add(node.right);
-                iq.add(r_idx);
-
-                if(idxmap.containsKey(r_idx)) {
-                    List<Integer> nlist = idxmap.get(r_idx);
-                    nlist.add(node.right.val);
-                }
-                else {
-                    idxmap.put(r_idx, new ArrayList<>(List.of(node.right.val)));
-                }
+                iq.add(n_idx+1);
             }
-
         }
 
         List<List<Integer>> result = new ArrayList<>();
