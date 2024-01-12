@@ -1,1 +1,1 @@
-<h2>minimum-remove-to-make-valid-parentheses Notes</h2><hr>O()
+<h2>minimum-remove-to-make-valid-parentheses Notes</h2><hr>O(n )
