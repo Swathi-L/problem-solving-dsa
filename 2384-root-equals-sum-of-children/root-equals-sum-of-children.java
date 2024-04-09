@@ -21,6 +21,13 @@ class Solution {
         if(root.left == null && root.right == null) {
             return true;
         }
+        boolean left = checkTree(root.left);
+        boolean right = checkTree(root.right);
+
+        if(left == false || right == false) {
+            return false;
+        }
+        
         int total = 0;
         if(root.left != null) {
             total += root.left.val;
@@ -30,10 +37,10 @@ class Solution {
         }
 
         if(root.val != total) {
-            System.out.println("root.val: " + root.val + " total: " + total);
+            // System.out.println("root.val: " + root.val + " total: " + total);
             return false;
         }
-        return checkTree(root.left) && checkTree(root.right);
+        return true;
     }
 
 }
