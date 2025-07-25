@@ -1,24 +1,43 @@
-// inefficient because arr size is initialized to 10^6
+// 1. Implemented using double hashing technique since key range is known
+// 2. Use 2 hash functions, primary hash = key mod len, secondary hash = key / len
+// Efficient use of space since 2d array is initialized to 10^3 to represent the hashSet
 class MyHashSet {
-    Boolean[] hashSet; 
+    Boolean[][] hashSet; 
+    int primarySetSize;
+    int secondarySetSize;
 
     public MyHashSet() {
-        hashSet = new Boolean[1000001];
-        for(int i=0; i<hashSet.length; i++) {
-            hashSet[i] = false;
-        }
+        primarySetSize = 1001;
+        secondarySetSize = 1001;
+        hashSet = new Boolean[primarySetSize][];
     }
     
     public void add(int key) {
-        hashSet[key] = true;
+        int primaryHash = key % primarySetSize;
+        int secondaryHash = key / secondarySetSize;
+        if(hashSet[primaryHash] == null) {
+            hashSet[primaryHash] = new Boolean[secondarySetSize];
+        }
+        hashSet[primaryHash][secondaryHash] = true;
     }
     
     public void remove(int key) {
-        hashSet[key] = false;
+        int primaryHash = key % primarySetSize;
+        int secondaryHash = key / secondarySetSize;
+        if(hashSet[primaryHash] != null &&
+            hashSet[primaryHash][secondaryHash] != null) {
+            hashSet[primaryHash][secondaryHash] = false;
+        }
     }
     
     public boolean contains(int key) {
-        return hashSet[key];
+        int primaryHash = key % primarySetSize;
+        int secondaryHash = key / secondarySetSize;
+        if(hashSet[primaryHash] == null 
+            || hashSet[primaryHash][secondaryHash] == null) {
+            return false;
+        }
+        return hashSet[primaryHash][secondaryHash];
     }
 }
 
