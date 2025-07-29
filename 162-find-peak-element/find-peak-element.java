@@ -1,28 +1,24 @@
 class Solution {
     public int findPeakElement(int[] nums) {
-        
-        int n=nums.length-1, left = 0, right = nums.length-1;
-        while(left < right) {
-            int mid = left + (right-left)/2;
-            int lv = Integer.MIN_VALUE, rv = Integer.MIN_VALUE;
+        int l=0, h=nums.length-1;
 
-            if(mid-1 >= 0) {
-                lv = nums[mid-1];
-            }
-            if(mid+1 <= n) {
-                rv = nums[mid+1];
-            }
-
-            if(lv < nums[mid] && rv < nums[mid]) {
+        while(l <= h) {
+            int mid = l + (h-l)/2;
+            if((mid - 1 < 0 || nums[mid] > nums[mid-1])
+                && (mid + 1 >= nums.length || nums[mid] > nums[mid+1])) {
                 return mid;
             }
-            if(lv > rv) {
-                right = mid-1;
+            // go left if left neighbor is larger than mid
+            else if(mid - 1 >= 0 && nums[mid] < nums[mid-1]) {
+                h = mid-1;
             }
+            // go right if right neighbor is larger than mid
             else {
-                left = mid+1;
+                l = mid+1;
             }
         }
-        return left;
+        // does not matter what is returned here 
+        // as there is a guaranteed peek in the array
+        return -1;
     }
 }
