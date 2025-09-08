@@ -12,13 +12,11 @@ class Solution {
             }
             else {
                 int endtime = endTimes.peek();
-                if(endtime > interval[0]) {
-                    endTimes.add(interval[1]);
-                }
-                else {
+                
+                if(endtime <= interval[0]) {
                     endTimes.poll();
-                    endTimes.add(interval[1]);
                 }
+                endTimes.add(interval[1]);
             }
         }
         return endTimes.size();
