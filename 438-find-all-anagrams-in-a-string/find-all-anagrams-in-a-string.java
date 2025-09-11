@@ -42,7 +42,6 @@ class Solution {
             if(match == pFreqMap.size()) {
                 indices.add(i - pLen + 1);
             }
-            System.out.println("i: " + i + " match: " + match + " char: " + s.charAt(i));
         }
         return indices;
     }
